@@ -9,4 +9,13 @@ services:
     ports:
       - "5001:80"
       - "127.0.0.1:9229:9229"
-  
+  # this service runs once to seed the database with votes
+  # it won't run unless you specify the "seed" profile
+  # docker compose -f compose.yaml -f extra-compose.yaml --profile seed up -d
+  seed:
+    build: ./seed-data
+    profiles: ["seed"]
+    depends_on:
+      vote-main:
+        condition: service_started 
+    restart: "no"
