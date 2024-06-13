@@ -1,0 +1,12 @@
+# Development only mixins for the compose file output by score-compose
+services:
+  vote-main:
+    volumes:
+     - ./vote:/usr/local/app
+  result-main:
+    volumes:
+      - ./result:/usr/local/app
+    ports:
+      - "5001:80"
+      - "127.0.0.1:9229:9229"
+  

@@ -4,6 +4,7 @@ metadata:
 containers:
   main:
     image: .
+    command: ["nodemon", "--inspect=0.0.0.0", "server.js"]
     variables:
       POSTGRES_CONN: postgresql://${resources.db.username}:${resources.db.password}@${resources.db.host}:${resources.db.port}/${resources.db.name}
 
