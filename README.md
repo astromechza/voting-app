@@ -1,3 +1,27 @@
+This is a demo microservices development environment using Gitpod.
+
+On workspace start, the gitpod workspaces installs score-compose, and uses it to generate a compose spec from the 3 services and the required Redis + Postgres (natively supported by score-compose).
+
+Then, it starts the resulting compose project and adds some development-only mixins for some volume bind mounts, an extra port to publish, and a seed-data service.
+
+Once started, it opens up the running vote HTML UI.
+
+To deploy to Kubernetes:
+
+```
+score-k8s init
+score-k8s generate vote/score.yaml --image=dockersamples/examplevotingapp_vote
+score-k8s generate worker/score.yaml --image=dockersamples/examplevotingapp_worker
+score-k8s generate result/score.yaml --image=dockersamples/examplevotingapp_result
+kubectl apply -f manifests.yaml
+```
+
+---------
+
+OLD CONTENT BELOW
+
+---------
+
 # Example Voting App
 
 A simple distributed application running across multiple Docker containers.
