@@ -11,7 +11,7 @@ tasks:
       ./score-compose generate worker/score.yaml --build main=./worker
       ./score-compose generate result/score.yaml --build main=./result
       ./score-compose generate seed-data/score.yaml --build main=./seed-data
-      docker compose up -f compose.yaml -f extra-compose.yaml --attach-dependencies vote-main worker-main result-main
+      docker compose -f compose.yaml -f extra-compose.yaml up --attach-dependencies vote-main worker-main result-main
 
   - name: Wait for port
     command: |
