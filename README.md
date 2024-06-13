@@ -6,6 +6,8 @@ Then, it starts the resulting compose project and adds some development-only mix
 
 Once started, it opens up the running vote HTML UI.
 
+To seed extra data, run `docker compose up --attach-dependencies --no-recreate seed-main`.
+
 To deploy to Kubernetes:
 
 ```

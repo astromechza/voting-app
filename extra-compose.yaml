@@ -3,6 +3,8 @@ services:
   vote-main:
     volumes:
      - ./vote:/usr/local/app
+    ports:
+      - "5000:80"
   result-main:
     volumes:
       - ./result:/usr/local/app
@@ -13,9 +15,5 @@ services:
   # it won't run unless you specify the "seed" profile
   # docker compose -f compose.yaml -f extra-compose.yaml --profile seed up -d
   seed:
-    build: ./seed-data
     profiles: ["seed"]
-    depends_on:
-      vote-main:
-        condition: service_started 
     restart: "no"

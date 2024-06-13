@@ -15,11 +15,3 @@ resources:
   cache:
     type: redis
     id: voting-redis
-  dns:
-    type: dns
-  route:
-    type: route
-    params:
-      host: ${resources.dns.host}
-      port: 5000
-      path: /

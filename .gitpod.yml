@@ -10,16 +10,17 @@ tasks:
       ./score-compose generate vote/score.yaml --build main=./vote
       ./score-compose generate worker/score.yaml --build main=./worker
       ./score-compose generate result/score.yaml --build main=./result
-      docker compose -f compose.yaml up
+      ./score-compose generate seed-data/score.yaml --build main=./seed-data
+      docker compose up --attach-dependencies vote-main worker-main result-main
 
   - name: Wait for port
     command: |
-      printf "Waiting for Voting App at $(gp url 8080) ..."
-      gp ports await 8080
+      printf "Waiting for Voting App at $(gp url 5000) ..."
+      gp ports await 5000
     openMode: split-right
 
 ports:
-  - port: 8080
+  - port: 5000
     onOpen: open-preview
   - port: 5001  # results
     onOpen: ignore
