@@ -3,8 +3,8 @@ tasks:
   - name: Terminal
     init: |
       curl -L -o score-compose.tgz https://github.com/score-spec/score-compose/releases/download/0.15.4/score-compose_0.15.4_linux_amd64.tar.gz
-      tar xvzf score-compose.tgz
-      rm score-compose.tgz README.md LICENSE
+      tar xvzf score-compose.tgz score-compose
+      rm score-compose.tgz
     before: |
       ./score-compose init --no-sample
       ./score-compose generate vote/score.yaml --build main=./vote
