@@ -1,0 +1,18 @@
+apiVersion: score.dev/v1b1
+metadata:
+  name: worker
+
+containers:
+  main:
+    image: .
+    variables:
+      REDIS_CONN: "${resources.cache.host}:${resources.cache.port},user=${resources.cache.username},password=${resources.cache.password},defaultDatabase=0"
+      POSTGRES_CONN: "Host=${resources.db.host};Port=${resources.db.port};Username=${resources.db.username};Password=${resources.db.password};Database=${resources.db.name}"
+
+resources:
+  cache:
+    type: redis
+    id: voting-redis
+  db:
+    type: postgres
+    id: voting-db

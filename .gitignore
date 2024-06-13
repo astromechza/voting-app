@@ -7,3 +7,6 @@ node_modules/
 worker/.project
 worker/.settings/
 worker/target/
+.score-compose/
+/score-compose
+/compose.yaml

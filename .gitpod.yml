@@ -1,23 +1,27 @@
 
 tasks:
   - name: Terminal
+    before: |
+      curl -L -o score-compose.tgz https://github.com/score-spec/score-compose/releases/download/0.15.4/score-compose_0.15.4_linux_amd64.tar.gz
+      tar xvzf score-compose.tgz
+      rm score-compose.tgz README.md LICENSE
     init: |
-      docker-compose build
+      ./score-compose init --no-sample
+      ./score-compose generate vote/score.yaml --build main=./vote
+      ./score-compose generate worker/score.yaml --build main=./worker
+      ./score-compose generate result/score.yaml --build main=./result
     command: |
       printf "Waiting for Voting App at $(gp url 5000) ..."
-      gp ports await 5000
-      gp open vote/app.py
+      gp ports await 8080
 
   - name: Docker Compose
-    command: docker-compose -f docker-compose.yml up
+    command: docker-compose -f compose.yaml up
     openMode: split-right
 
 ports:
-  - port: 5000
+  - port: 8080
     onOpen: open-preview
   - port: 5001  # results
-    onOpen: ignore
-  - port: 5858
     onOpen: ignore
 
 vscode:

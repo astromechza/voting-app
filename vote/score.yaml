@@ -1,0 +1,25 @@
+apiVersion: score.dev/v1b1
+metadata:
+  name: vote
+containers:
+  main:
+    image: .
+    variables:
+      REDIS_CONN: redis://${resources.cache.username}:${resources.cache.password}@${resources.cache.host}:${resources.cache.port}/0
+service:
+  ports:
+    web:
+      port: 5000
+      targetPort: 80
+resources:
+  cache:
+    type: redis
+    id: voting-redis
+  dns:
+    type: dns
+  route:
+    type: route
+    params:
+      host: ${resources.dns.host}
+      port: 5000
+      path: /

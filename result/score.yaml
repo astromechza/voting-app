@@ -1,0 +1,19 @@
+apiVersion: score.dev/v1b1
+metadata:
+  name: result
+containers:
+  main:
+    image: .
+    variables:
+      POSTGRES_CONN: postgresql://${resources.db.username}:${resources.db.password}@${resources.db.host}:${resources.db.port}/${resources.db.name}
+
+service:
+  ports:
+    web:
+      port: 5001
+      targetPort: 80
+
+resources:
+  db:
+    type: postgres
+    id: voting-db
